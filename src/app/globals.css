@@ -1,0 +1,454 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Arial, sans-serif;
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+}
+
+/* ============================================
+   THESISSCOPE — NEOBRUTALIST DESIGN SYSTEM
+   ============================================ */
+
+:root {
+  /* ThesisScope palette */
+  --bg: #f3efe6; /* warm paper */
+  --ink: #111111; /* black */
+  --primary: #3b4bff; /* electric blue */
+  --pros: #3ddc97; /* mint */
+  --cons: #ff4f8b; /* hot pink */
+  --risk: #b79cff; /* lavender */
+  --tips: #5ce1e6; /* cyan */
+  --card: #ffffff;
+
+  /* keep template tokens for shadcn internals */
+  --radius: 0.25rem;
+  --background: #f3efe6;
+  --foreground: #111111;
+  --border: #111111;
+  --muted-foreground: #55504a;
+  --destructive: #ff4f8b;
+}
+
+/* ---------- base ---------- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Arial, sans-serif;
+  /* visible grid feel — hard 1px lines, no soft gradient */
+  background-image: repeating-linear-gradient(
+      0deg,
+      rgba(17, 17, 17, 0.055) 0px,
+      rgba(17, 17, 17, 0.055) 1px,
+      transparent 1px,
+      transparent 36px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(17, 17, 17, 0.055) 0px,
+      rgba(17, 17, 17, 0.055) 1px,
+      transparent 1px,
+      transparent 36px
+    );
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--tips);
+}
+
+/* ---------- core neobrutalist pieces ---------- */
+
+.nb-border {
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+}
+
+.nb-shadow {
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.nb-shadow-sm {
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.nb-card {
+  background: var(--card);
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.nb-titlebar {
+  background: var(--ink);
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 3px solid var(--ink);
+}
+
+/* ---------- buttons that physically press ---------- */
+
+.nb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 5px 5px 0 var(--ink);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 90ms ease, box-shadow 90ms ease;
+}
+
+.nb-btn:hover:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.nb-btn:active:not(:disabled) {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.nb-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ---------- inputs ---------- */
+
+.nb-input {
+  width: 100%;
+  background: #ffffff;
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  font-weight: 600;
+  padding: 0.625rem 0.75rem;
+  outline: none;
+  transition: box-shadow 100ms ease, transform 100ms ease;
+}
+
+.nb-input::placeholder {
+  color: #8a857d;
+  font-weight: 500;
+}
+
+.nb-input:focus {
+  box-shadow: 4px 4px 0 var(--primary);
+  border-color: var(--ink);
+}
+
+.nb-input.nb-input-error {
+  box-shadow: 4px 4px 0 var(--cons);
+  border-color: var(--ink);
+}
+
+.nb-label {
+  display: block;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.78rem;
+}
+
+/* native select: chunky arrow */
+.nb-select-wrap {
+  position: relative;
+}
+
+.nb-select-wrap::after {
+  content: "";
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+.nb-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.4rem;
+}
+
+/* ---------- stickers / badges ---------- */
+
+.sticker {
+  display: inline-block;
+  background: var(--pros);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+  transform: rotate(-4deg);
+}
+
+/* ---------- wordmark ---------- */
+
+.wordmark {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  color: var(--ink);
+  text-shadow: 5px 5px 0 var(--primary);
+}
+
+/* ---------- pop-in animation (staggered results) ---------- */
+
+@keyframes nb-pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pop-in {
+  animation: nb-pop-in 240ms cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+
+/* ---------- loading overlay ---------- */
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: var(--primary);
+  background-image: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.16) 0px,
+      rgba(255, 255, 255, 0.16) 2px,
+      transparent 2px,
+      transparent 44px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.16) 0px,
+      rgba(255, 255, 255, 0.16) 2px,
+      transparent 2px,
+      transparent 44px
+    );
+}
+
+/* three chunky bouncing squares */
+.sq {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--ink);
+  border-radius: 2px;
+  animation: nb-sq 1.35s ease-in-out infinite;
+}
+
+.sq-mint {
+  background: var(--pros);
+}
+
+.sq-pink {
+  background: var(--cons);
+  animation-delay: 0.18s;
+}
+
+.sq-lav {
+  background: var(--risk);
+  animation-delay: 0.36s;
+}
+
+@keyframes nb-sq {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-16px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(0) rotate(180deg);
+  }
+  75% {
+    transform: translateY(-16px) rotate(270deg);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+  }
+}
+
+/* segmented progress bars */
+.seg-track {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+}
+
+.seg {
+  flex: 1;
+  height: 14px;
+  border: 2px solid var(--ink);
+  border-radius: 2px;
+  background: #ffffff;
+}
+
+.seg-on {
+  background: var(--ink);
+}
+
+/* ---------- lists (chunky square bullets) ---------- */
+
+.nb-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nb-list li {
+  position: relative;
+  padding-left: 1.35rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.nb-list li + li {
+  margin-top: 0.65rem;
+}
+
+.nb-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.42em;
+  width: 9px;
+  height: 9px;
+  background: var(--ink);
+}
+
+/* numbered variant for panel questions */
+.nb-list-num {
+  counter-reset: nbq;
+}
+
+.nb-list-num li::before {
+  counter-increment: nbq;
+  content: counter(nbq);
+  width: 22px;
+  height: 22px;
+  top: 0.08em;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+/* ---------- toast ---------- */
+
+@keyframes nb-toast-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20px) rotate(-2deg) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) rotate(-2deg) scale(1);
+  }
+}
+
+.toast-in {
+  animation: nb-toast-in 180ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+/* ---------- error chip ---------- */
+
+.error-chip {
+  display: inline-block;
+  background: var(--cons);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ---------- long list scrolling (custom scrollbar) ---------- */
+
+.nb-scroll {
+  max-height: 22rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink) transparent;
+}
+
+.nb-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.nb-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.nb-scroll::-webkit-scrollbar-thumb {
+  background: var(--ink);
+  border-radius: 2px;
+}
+
+/* ---------- focus visibility (keyboard users) ---------- */
+
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ---------- reduced motion: kill all animations ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .sq,
+  .pop-in,
+  .toast-in {
+    animation: none !important;
+  }
+
+  .nb-btn,
+  .nb-input {
+    transition: none !important;
+  }
+}
